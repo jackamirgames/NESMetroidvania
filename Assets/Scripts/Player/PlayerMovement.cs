@@ -25,8 +25,8 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         Debug.Log(rb.linearVelocity);
-        //rb.linearVelocity = new Vector2 (movementDir.x, rb.linearVelocity.y) * moveSpeed * Time.fixedDeltaTime * 10f;
-        //rb.MovePosition(transform.position + new Vector3(movementDir.x * moveSpeed * Time.fixedDeltaTime, 0f, 0f));
+        rb.linearVelocity = new Vector2(movementDir.x * moveSpeed * Time.fixedDeltaTime * 10f, rb.linearVelocity.y);
+        //rb.MovePosition(new Vector2(transform.position.x + (movementDir.x * moveSpeed * Time.fixedDeltaTime), rb.position.y));
     }
 
     public void Move(InputAction.CallbackContext context)
@@ -39,9 +39,15 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.performed)
         {
-            Debug.Log("Jumped");
             //rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-            rb.AddForce(new Vector2(0f, 10f * jumpForce), ForceMode2D.Force);
+            rb.AddForce(new Vector2(0f, 100f * jumpForce), ForceMode2D.Force);
+        }
+
+        if (context.canceled)
+        {
+            if (rb.linearVelocity.y <= 0f) return;
+
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
         }
     }
 }
