@@ -2,6 +2,11 @@ using UnityEngine;
 
 public class PerformanceManager : MonoBehaviour
 {
+    private void Start()
+    {
+        Application.targetFrameRate = 60;
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
