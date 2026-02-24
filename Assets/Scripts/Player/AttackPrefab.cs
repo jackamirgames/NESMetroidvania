@@ -12,7 +12,8 @@ public class AttackPrefab : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            Debug.Log("Hit an enemy");
+            //Call the damage function on the interface
+            collision.gameObject.GetComponent<IDamageable>().TakeDamage(2);
         }
     }
 
