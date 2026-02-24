@@ -5,6 +5,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float attackCooldown;
     private float tempAttackCooldown;
 
+    [SerializeField] private GameObject attackPrefab;
+    [SerializeField] private Transform attackTransform;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,7 +27,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (tempAttackCooldown > 0) return;
 
-        Debug.Log("Attacking");
+        Instantiate(attackPrefab, attackTransform.position, Quaternion.identity);
         tempAttackCooldown = attackCooldown;
     }
 }
