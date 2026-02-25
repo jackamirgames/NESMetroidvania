@@ -10,6 +10,8 @@ public class AttackPrefab : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log(collision.gameObject.name);
+
         if (collision.CompareTag("Enemy") || collision.CompareTag("Interactable"))
         {
             //Call the damage function on the interface

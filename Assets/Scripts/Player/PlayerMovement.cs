@@ -50,8 +50,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         CheckFacedDirection();
-
-        Debug.Log(latestDir);
     }
 
     public void Jump(InputAction.CallbackContext context)

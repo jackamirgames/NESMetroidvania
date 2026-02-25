@@ -1,3 +1,4 @@
+using UnityEditor.Scripting;
 using UnityEngine;
 
 public class DoorBehaviour : MonoBehaviour, IDamageable
@@ -11,6 +12,8 @@ public class DoorBehaviour : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damage)
     {
+        Debug.Log("Here");
+
         DoorHits--;
 
         if (DoorHits <= 0)
