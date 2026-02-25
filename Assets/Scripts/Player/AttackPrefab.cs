@@ -10,7 +10,7 @@ public class AttackPrefab : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
+        if (collision.CompareTag("Enemy") || collision.CompareTag("Interactable"))
         {
             //Call the damage function on the interface
             collision.gameObject.GetComponent<IDamageable>().TakeDamage(2);
@@ -19,7 +19,7 @@ public class AttackPrefab : MonoBehaviour
 
     public IEnumerator countDown()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.2f);
         Destroy(gameObject);
     }
 

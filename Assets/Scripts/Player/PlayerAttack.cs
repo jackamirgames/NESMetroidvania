@@ -23,11 +23,19 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+    GameObject newAttackPrefab;
     public void Attack()
     {
         if (tempAttackCooldown > 0) return;
 
-        Instantiate(attackPrefab, attackTransform.position, Quaternion.identity);
+        newAttackPrefab = Instantiate(attackPrefab, attackTransform.position, Quaternion.identity);
+
+        //Check which side the attack prefab is on
+        if (attackTransform.localPosition.x < 0)
+        {
+            newAttackPrefab.transform.localScale = new Vector3(-1f, 1, 1);
+        }
+
         tempAttackCooldown = attackCooldown;
     }
 }

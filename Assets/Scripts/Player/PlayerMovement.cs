@@ -6,16 +6,25 @@ public class PlayerMovement : MonoBehaviour
     //Variables
     [SerializeField] private float moveSpeed;
     private Vector2 movementDir;
+    private Vector2 latestDir;
+    private bool isFacingRight;
     [SerializeField] private float jumpForce;
 
     [SerializeField] private Vector2 boxSize;
     [SerializeField] private float castDistance;
     [SerializeField] private LayerMask groundLayer;
 
+    [SerializeField] private GameObject attackPos;
+
     private Rigidbody2D rb;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
+        isFacingRight = true;
     }
 
     private void Update()
@@ -34,6 +43,15 @@ public class PlayerMovement : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         movementDir = context.ReadValue<Vector2>();
+        
+        if (movementDir != Vector2.zero)
+        {
+            latestDir = movementDir;
+        }
+
+        CheckFacedDirection();
+
+        Debug.Log(latestDir);
     }
 
     public void Jump(InputAction.CallbackContext context)
@@ -60,6 +78,20 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             return false;
+        }
+    }
+
+    public void CheckFacedDirection()
+    {
+        if (latestDir.x >= 0) //Facing Right
+        {
+            isFacingRight = true;
+            attackPos.transform.localPosition = new Vector2(1f, 1.5f);
+        }
+        else if (latestDir.x < 0) //Facing Left
+        {
+            isFacingRight = false;
+            attackPos.transform.localPosition = new Vector2(-1f, 1.5f);
         }
     }
 
