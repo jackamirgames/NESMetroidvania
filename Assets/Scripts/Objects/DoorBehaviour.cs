@@ -10,14 +10,16 @@ public class DoorBehaviour : MonoBehaviour, IDamageable
         set { _doorHits = value; }
     }
 
+    [Space]
+    [SerializeField] private GameObject DoorPair;
+
     public void TakeDamage(int damage)
     {
-        Debug.Log("Here");
-
         DoorHits--;
 
         if (DoorHits <= 0)
         {
+            if (DoorPair != null) DoorPair.GetComponent<IDamageable>().Die();
             Die();
         }
     }
