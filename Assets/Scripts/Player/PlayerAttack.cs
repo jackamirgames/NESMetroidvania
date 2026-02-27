@@ -2,11 +2,19 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    //Other player scripts
+    private PlayerStates _playerStates;
+
     [SerializeField] private float attackCooldown;
     private float tempAttackCooldown;
 
     [SerializeField] private GameObject attackPrefab;
     [SerializeField] private Transform attackTransform;
+
+    private void Awake()
+    {
+        _playerStates = GetComponent<PlayerStates>();
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,6 +34,7 @@ public class PlayerAttack : MonoBehaviour
     GameObject newAttackPrefab;
     public void Attack()
     {
+        if (!_playerStates.CanControl) return;
         if (tempAttackCooldown > 0) return;
 
         newAttackPrefab = Instantiate(attackPrefab, attackTransform.position, Quaternion.identity);

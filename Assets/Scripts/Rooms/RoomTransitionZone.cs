@@ -7,6 +7,8 @@ public class RoomTransitionZone : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             CameraManager.instance.SwapCams();
+
+            collision.gameObject.GetComponent<PlayerMovement>().SetCutsceneMovement(true);
         }
     }
 }
