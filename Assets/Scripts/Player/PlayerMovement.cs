@@ -124,7 +124,7 @@ public class PlayerMovement : MonoBehaviour
         {
             cutsceneMovementDir = movementDir;
         }
-        StartCoroutine(_playerStates.TimeToGiveBackControl(1.5f));
+        StartCoroutine(_playerStates.TimeToGiveBackControl(1f));
     }
 
     private void OnDrawGizmos()
