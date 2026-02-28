@@ -36,6 +36,21 @@ public class CameraManager : MonoBehaviour
         }
     }
 
+    public void MoveToNextRoom(RoomDataSO nextRoom)
+    {
+        //Get cam without priority and Assign the room details of that cam
+        if (mainCam1.Priority == 0)
+        {
+            mainCam1.GetComponent<CameraBehaviour>().AssignCameraDetails(nextRoom);
+        }
+        else
+        {
+            mainCam2.GetComponent<CameraBehaviour>().AssignCameraDetails(nextRoom);
+        }
+
+        SwapCams();
+    }
+
     public void SwapCams()
     {
         if (mainCam1.Priority == 0) //Make Cam1 Active

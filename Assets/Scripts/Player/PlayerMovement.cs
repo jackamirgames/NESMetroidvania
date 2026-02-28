@@ -10,7 +10,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float moveSpeed;
     private Vector2 movementDir;
     private Vector2 latestDir;
-    private bool isFacingRight;
+    [SerializeField] private bool isFacingRight;
+    public bool IsFacingRight
+    {
+        get { return isFacingRight; }
+        set { isFacingRight = value; }
+    }
+
     [SerializeField] private float jumpForce;
 
     [SerializeField] private Vector2 boxSize;
