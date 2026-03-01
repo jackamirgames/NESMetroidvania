@@ -4,8 +4,8 @@ public class PlayerUpgrades : MonoBehaviour
 {
     public enum JumpUpgrades
     {
-        None = 3,
-        Upgrade1 = 6,
+        Low = 3,
+        Normal = 6,
     }
 
     [SerializeField] private JumpUpgrades _currentJump;

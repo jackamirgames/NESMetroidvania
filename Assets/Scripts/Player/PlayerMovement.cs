@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
 {
     //Other Player scripts
     private PlayerStates _playerStates;
+    private PlayerUpgrades _playerUpgrades;
 
     //Variables
     [SerializeField] private float moveSpeed;
@@ -17,8 +18,7 @@ public class PlayerMovement : MonoBehaviour
         set { isFacingRight = value; }
     }
 
-    [SerializeField] private float jumpForce;
-
+    [Header("Jump Checks")]
     [SerializeField] private Vector2 boxSize;
     [SerializeField] private float castDistance;
     [SerializeField] private LayerMask groundLayer;
@@ -32,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         _playerStates = GetComponent<PlayerStates>();
+        _playerUpgrades = GetComponent<PlayerUpgrades>();
 
         rb = GetComponent<Rigidbody2D>();
     }
@@ -71,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (context.performed && isGrounded())
         {
-            rb.AddForce(new Vector2(0f, 100f * jumpForce), ForceMode2D.Force);
+            rb.AddForce(new Vector2(0f, 100f * _playerUpgrades.GetJumpPower()), ForceMode2D.Force);
         }
 
         if (context.canceled)
