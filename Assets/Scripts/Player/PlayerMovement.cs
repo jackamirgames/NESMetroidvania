@@ -41,14 +41,6 @@ public class PlayerMovement : MonoBehaviour
         isFacingRight = true;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            
-        }
-    }
-
     private void FixedUpdate()
     {
         if (_playerStates.CanControl)
