@@ -4,6 +4,7 @@ public class PlayerAttack : MonoBehaviour
 {
     //Other player scripts
     private PlayerStates _playerStates;
+    private PlayerUpgrades _playerUpgrades;
 
     [SerializeField] private float attackCooldown;
     private float tempAttackCooldown;
@@ -14,6 +15,7 @@ public class PlayerAttack : MonoBehaviour
     private void Awake()
     {
         _playerStates = GetComponent<PlayerStates>();
+        _playerUpgrades = GetComponent<PlayerUpgrades>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -34,8 +36,7 @@ public class PlayerAttack : MonoBehaviour
     GameObject newAttackPrefab;
     public void Attack()
     {
-        if (!_playerStates.CanControl) return;
-        if (tempAttackCooldown > 0) return;
+        if (!CanPlayerAttack()) return;
 
         newAttackPrefab = Instantiate(attackPrefab, attackTransform.position, Quaternion.identity);
 
@@ -46,5 +47,14 @@ public class PlayerAttack : MonoBehaviour
         }
 
         tempAttackCooldown = attackCooldown;
+    }
+
+    private bool CanPlayerAttack()
+    {
+        if (!_playerUpgrades.AttackUnlocked) return false;
+        if (!_playerStates.CanControl) return false;
+        if (tempAttackCooldown > 0) return false;
+
+        return true;
     }
 }

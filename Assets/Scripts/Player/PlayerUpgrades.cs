@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerUpgrades : MonoBehaviour
 {
+    //JUMPING UPGRADES
     public enum JumpUpgrades
     {
         Low = 3,
@@ -18,5 +19,13 @@ public class PlayerUpgrades : MonoBehaviour
     public int GetJumpPower()
     {
         return (int)CurrentJump;
+    }
+
+    //ATTACK UPGRADES
+    [SerializeField] private bool _attackUnlocked;
+    public bool AttackUnlocked
+    {
+        get { return _attackUnlocked; }
+        set { _attackUnlocked = value; }
     }
 }
