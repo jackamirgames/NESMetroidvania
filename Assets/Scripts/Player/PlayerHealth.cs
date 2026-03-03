@@ -16,9 +16,15 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         set { _maxHealth = value; }
     }
 
+    private void Start()
+    {
+        Health = MaxHealth;
+    }
+
     public void TakeDamage(int damage)
     {
         Health -= damage;
+        Debug.Log(Health);
 
         if (Health <= 0)
         {
