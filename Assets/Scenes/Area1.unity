@@ -8864,7 +8864,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6488583315560917695, guid: 2f527bf23119b52489d475f5a72a9277, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.99999976
+      value: -26
       objectReference: {fileID: 0}
     - target: {fileID: 6488583315560917695, guid: 2f527bf23119b52489d475f5a72a9277, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8957,11 +8957,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6488583315560917695, guid: 2f527bf23119b52489d475f5a72a9277, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5
+      value: -10.998035
       objectReference: {fileID: 0}
     - target: {fileID: 6488583315560917695, guid: 2f527bf23119b52489d475f5a72a9277, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.99999976
+      value: -3.5
       objectReference: {fileID: 0}
     - target: {fileID: 6488583315560917695, guid: 2f527bf23119b52489d475f5a72a9277, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9031,7 +9031,7 @@ GameObject:
   - component: {fileID: 922126998}
   - component: {fileID: 922126999}
   m_Layer: 7
-  m_Name: Room1 Border
+  m_Name: StartRoom Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9421,7 +9421,7 @@ GameObject:
   - component: {fileID: 1619024704}
   - component: {fileID: 1619024705}
   m_Layer: 7
-  m_Name: Room3 Border
+  m_Name: JumpUpgradeRoom Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9578,7 +9578,7 @@ Transform:
   m_GameObject: {fileID: 1660156951}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: -3.4981613, z: -20}
+  m_LocalPosition: {x: 5, y: -26, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9709,7 +9709,7 @@ GameObject:
   - component: {fileID: 1672802606}
   - component: {fileID: 1672802607}
   m_Layer: 7
-  m_Name: Room2 Border
+  m_Name: 1stEnemiesRoom Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9836,6 +9836,14 @@ PrefabInstance:
       propertyPath: roomRight
       value: 
       objectReference: {fileID: 11400000, guid: 2be843f13804d3444b07e0679aa22c89, type: 2}
+    - target: {fileID: 9208066918141180554, guid: 39443ebaf91dcf64f89852ec459de6b8, type: 3}
+      propertyPath: roomLeftBorder
+      value: 
+      objectReference: {fileID: 1619024705}
+    - target: {fileID: 9208066918141180554, guid: 39443ebaf91dcf64f89852ec459de6b8, type: 3}
+      propertyPath: roomRightBorder
+      value: 
+      objectReference: {fileID: 1672802607}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9906,6 +9914,14 @@ PrefabInstance:
       propertyPath: roomRight
       value: 
       objectReference: {fileID: 11400000, guid: cf708db5eea22b047a93384fc907e179, type: 2}
+    - target: {fileID: 9208066918141180554, guid: 39443ebaf91dcf64f89852ec459de6b8, type: 3}
+      propertyPath: roomLeftBorder
+      value: 
+      objectReference: {fileID: 1672802607}
+    - target: {fileID: 9208066918141180554, guid: 39443ebaf91dcf64f89852ec459de6b8, type: 3}
+      propertyPath: roomRightBorder
+      value: 
+      objectReference: {fileID: 922126999}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

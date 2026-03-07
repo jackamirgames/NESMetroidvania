@@ -6,10 +6,12 @@ public class CameraBehaviour : MonoBehaviour
     public RoomDataSO currentRoomData;
 
     public LockCamera _lockCamera;
+    public CinemachineConfiner2D _cinemachineConfiner2D;
 
     private void Awake()
     {
         _lockCamera = GetComponent<LockCamera>();
+        _cinemachineConfiner2D = GetComponent<CinemachineConfiner2D>();
     }
 
     private void Start()
@@ -17,7 +19,7 @@ public class CameraBehaviour : MonoBehaviour
         GetComponent<CinemachineCamera>().Target.TrackingTarget = GameObject.Find("Player").transform;
     }
 
-    public void AssignCameraDetails(RoomDataSO newRoom)
+    public void AssignCameraDetails(RoomDataSO newRoom, BoxCollider2D newRoomBorder)
     {
         currentRoomData = newRoom;
 
@@ -26,5 +28,7 @@ public class CameraBehaviour : MonoBehaviour
 
         _lockCamera.lockYPos = currentRoomData.lockYPos;
         _lockCamera.m_YPosition = currentRoomData.yCamPos;
+
+        _cinemachineConfiner2D.BoundingShape2D = newRoomBorder;
     }
 }

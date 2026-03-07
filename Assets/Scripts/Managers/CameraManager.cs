@@ -36,16 +36,16 @@ public class CameraManager : MonoBehaviour
         }
     }
 
-    public void MoveToNextRoom(RoomDataSO nextRoom)
+    public void MoveToNextRoom(RoomDataSO nextRoom, BoxCollider2D nextRoomBorder)
     {
         //Get cam without priority and Assign the room details of that cam
         if (mainCam1.Priority == 0)
         {
-            mainCam1.GetComponent<CameraBehaviour>().AssignCameraDetails(nextRoom);
+            mainCam1.GetComponent<CameraBehaviour>().AssignCameraDetails(nextRoom, nextRoomBorder);
         }
         else
         {
-            mainCam2.GetComponent<CameraBehaviour>().AssignCameraDetails(nextRoom);
+            mainCam2.GetComponent<CameraBehaviour>().AssignCameraDetails(nextRoom, nextRoomBorder);
         }
 
         SwapCams();
