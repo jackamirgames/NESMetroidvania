@@ -25,6 +25,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private GameObject attackPos;
 
+    private bool isDucking;
+
     //Cutscene Stuff
     private Vector2 cutsceneMovementDir;
 
@@ -40,10 +42,13 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         isFacingRight = true;
+        isDucking = false;
     }
 
     private void FixedUpdate()
     {
+        if (isDucking) return;
+
         if (_playerStates.CanControl)
         {
             rb.linearVelocity = new Vector2(movementDir.x * moveSpeed * Time.fixedDeltaTime * 10f, rb.linearVelocity.y);
@@ -80,6 +85,24 @@ public class PlayerMovement : MonoBehaviour
             if (rb.linearVelocity.y <= 0f) return;
 
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
+        }
+    }
+
+    public void Duck(InputAction.CallbackContext context)
+    {
+        if (context.performed && isGrounded())
+        {
+            isDucking = true;
+            Debug.Log(isDucking);
+        }
+    }
+
+    public void UnDuck(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            isDucking = false;
+            Debug.Log(isDucking);
         }
     }
 

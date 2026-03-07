@@ -12,6 +12,11 @@ public class CameraBehaviour : MonoBehaviour
         _lockCamera = GetComponent<LockCamera>();
     }
 
+    private void Start()
+    {
+        GetComponent<CinemachineCamera>().Target.TrackingTarget = GameObject.Find("Player").transform;
+    }
+
     public void AssignCameraDetails(RoomDataSO newRoom)
     {
         currentRoomData = newRoom;
