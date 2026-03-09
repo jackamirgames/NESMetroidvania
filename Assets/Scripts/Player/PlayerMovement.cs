@@ -27,6 +27,9 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isDucking;
 
+    //Animator parts - Should change to be one script later
+    private Animator _animator;
+
     //Cutscene Stuff
     private Vector2 cutsceneMovementDir;
 
@@ -37,6 +40,9 @@ public class PlayerMovement : MonoBehaviour
         _playerUpgrades = GetComponent<PlayerUpgrades>();
 
         rb = GetComponent<Rigidbody2D>();
+
+        _animator = GetComponentInChildren<Animator>();
+        _animator.enabled = true;
     }
 
     private void Start()
@@ -69,6 +75,15 @@ public class PlayerMovement : MonoBehaviour
         }
 
         CheckFacedDirection();
+
+        if (isFacingRight)
+        {
+            _animator.SetFloat("IsFacingRight", 1);
+        }
+        else
+        {
+            _animator.SetFloat("IsFacingRight", 0);
+        }
     }
 
     public void Jump(InputAction.CallbackContext context)
