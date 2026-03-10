@@ -84,6 +84,8 @@ public class PlayerMovement : MonoBehaviour
         {
             _animator.SetFloat("IsFacingRight", 0);
         }
+
+        _animator.SetFloat("HorizontalDir", Mathf.Abs(movementDir.x));
     }
 
     public void Jump(InputAction.CallbackContext context)
