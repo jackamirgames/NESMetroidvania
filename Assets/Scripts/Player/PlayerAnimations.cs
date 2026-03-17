@@ -17,13 +17,15 @@ public class PlayerAnimations : MonoBehaviour
     private void OnEnable()
     {
         _playerMovement.PlayerJumped += UpdateIsGrounded;
-        _playerMovement.PlayerMovementChanged += UpdateHorizontalDir;
+        _playerMovement.PlayerStartedMovement += UpdateHorizontalDir;
+        _playerMovement.PlayerChangedFacedDirection += UpdateIsFacingRight;
     }
 
     private void OnDisable()
     {
         _playerMovement.PlayerJumped -= UpdateIsGrounded;
-        _playerMovement.PlayerMovementChanged -= UpdateHorizontalDir;
+        _playerMovement.PlayerStartedMovement -= UpdateHorizontalDir;
+        _playerMovement.PlayerChangedFacedDirection -= UpdateIsFacingRight;
     }
 
     private void UpdateIsGrounded(bool isGrounded)

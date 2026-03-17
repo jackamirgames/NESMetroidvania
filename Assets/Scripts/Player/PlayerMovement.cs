@@ -28,12 +28,10 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isDucking;
 
-    //Animator parts - Should change to be one script later
-    private Animator _animator;
-
     //Events
     public event Action<bool> PlayerJumped;
-    public event Action<float> PlayerMovementChanged;
+    public event Action<float> PlayerStartedMovement;
+    public event Action<bool> PlayerChangedFacedDirection;
 
     //Cutscene Stuff
     private Vector2 cutsceneMovementDir;
@@ -45,9 +43,6 @@ public class PlayerMovement : MonoBehaviour
         _playerUpgrades = GetComponent<PlayerUpgrades>();
 
         rb = GetComponent<Rigidbody2D>();
-
-        _animator = GetComponentInChildren<Animator>();
-        _animator.enabled = true;
     }
 
     private void Start()
@@ -74,23 +69,16 @@ public class PlayerMovement : MonoBehaviour
     {
         movementDir = context.ReadValue<Vector2>();
         
-        if (movementDir != Vector2.zero)
+        if (movementDir != Vector2.zero && movementDir != latestDir)
         {
             latestDir = movementDir;
+            Debug.Log("Latest Dir: " + latestDir);
         }
 
         CheckFacedDirection();
 
-        if (isFacingRight)
-        {
-            _animator.SetFloat("IsFacingRight", 1);
-        }
-        else
-        {
-            _animator.SetFloat("IsFacingRight", 0);
-        }
-
-        OnPlayerMovementChanged(Mathf.Abs(movementDir.x));
+        OnPlayerChangedFacedDirection(isFacingRight);
+        OnPlayerStartedMovement(Mathf.Abs(movementDir.x));
     }
 
     public void Jump(InputAction.CallbackContext context)
@@ -100,8 +88,7 @@ public class PlayerMovement : MonoBehaviour
         if (context.performed && isGrounded())
         {
             rb.AddForce(new Vector2(0f, 100f * _playerUpgrades.GetJumpPower()), ForceMode2D.Force);
-
-            OnPlayerJumped();
+            OnPlayerJumped(true);
         }
 
         if (context.canceled)
@@ -170,13 +157,18 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.DrawWireCube(transform.position - transform.up * castDistance, boxSize);
     }
 
-    private void OnPlayerJumped()
+    private void OnPlayerJumped(bool inJump)
     {
-        PlayerJumped?.Invoke(isGrounded());
+        PlayerJumped?.Invoke(!inJump);
     }
 
-    private void OnPlayerMovementChanged(float dir)
+    private void OnPlayerStartedMovement(float dir)
     {
-        PlayerMovementChanged?.Invoke(dir);
+        PlayerStartedMovement?.Invoke(dir);
+    }
+
+    private void OnPlayerChangedFacedDirection(bool isFacingRight)
+    {
+        PlayerChangedFacedDirection(isFacingRight);
     }
 }
