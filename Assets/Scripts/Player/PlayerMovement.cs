@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject attackPos;
 
     private bool isDucking;
+    private bool isCurrentlyOnGround;
 
     //Events
     public event Action<bool> PlayerJumped;
@@ -49,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
     {
         isFacingRight = true;
         isDucking = false;
+        isCurrentlyOnGround = isGrounded();
     }
 
     private void FixedUpdate()
@@ -63,6 +65,14 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(cutsceneMovementDir.x * moveSpeed * Time.fixedDeltaTime * 10f, rb.linearVelocity.y);
         }
+
+        //Prevents needing the event to be called every frame. Is now only called when the ground state changes
+        if (isCurrentlyOnGround != isGrounded())
+        {
+            OnPlayerJumped(isGrounded());
+            Debug.Log("Changed ground state: " + isGrounded());
+        }
+        isCurrentlyOnGround = isGrounded();
     }
 
     public void Move(InputAction.CallbackContext context)
@@ -72,7 +82,6 @@ public class PlayerMovement : MonoBehaviour
         if (movementDir != Vector2.zero && movementDir != latestDir)
         {
             latestDir = movementDir;
-            Debug.Log("Latest Dir: " + latestDir);
         }
 
         CheckFacedDirection();
@@ -159,7 +168,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnPlayerJumped(bool inJump)
     {
-        PlayerJumped?.Invoke(!inJump);
+        PlayerJumped?.Invoke(inJump);
     }
 
     private void OnPlayerStartedMovement(float dir)
