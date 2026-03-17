@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -29,6 +30,10 @@ public class PlayerMovement : MonoBehaviour
 
     //Animator parts - Should change to be one script later
     private Animator _animator;
+
+    //Events
+    public event Action<bool> PlayerJumped;
+    public event Action<float> PlayerMovementChanged;
 
     //Cutscene Stuff
     private Vector2 cutsceneMovementDir;
@@ -85,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetFloat("IsFacingRight", 0);
         }
 
-        _animator.SetFloat("HorizontalDir", Mathf.Abs(movementDir.x));
+        OnPlayerMovementChanged(Mathf.Abs(movementDir.x));
     }
 
     public void Jump(InputAction.CallbackContext context)
@@ -95,6 +100,8 @@ public class PlayerMovement : MonoBehaviour
         if (context.performed && isGrounded())
         {
             rb.AddForce(new Vector2(0f, 100f * _playerUpgrades.GetJumpPower()), ForceMode2D.Force);
+
+            OnPlayerJumped();
         }
 
         if (context.canceled)
@@ -110,7 +117,6 @@ public class PlayerMovement : MonoBehaviour
         if (context.performed && isGrounded())
         {
             isDucking = true;
-            Debug.Log(isDucking);
         }
     }
 
@@ -119,7 +125,6 @@ public class PlayerMovement : MonoBehaviour
         if (context.performed)
         {
             isDucking = false;
-            Debug.Log(isDucking);
         }
     }
 
@@ -163,5 +168,15 @@ public class PlayerMovement : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position - transform.up * castDistance, boxSize);
+    }
+
+    private void OnPlayerJumped()
+    {
+        PlayerJumped?.Invoke(isGrounded());
+    }
+
+    private void OnPlayerMovementChanged(float dir)
+    {
+        PlayerMovementChanged?.Invoke(dir);
     }
 }

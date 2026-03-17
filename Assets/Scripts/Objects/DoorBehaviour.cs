@@ -1,4 +1,3 @@
-using UnityEditor.Scripting;
 using UnityEngine;
 
 public class DoorBehaviour : MonoBehaviour, IDamageable
