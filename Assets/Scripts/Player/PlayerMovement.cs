@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     public event Action<bool> PlayerJumped;
     public event Action<float> PlayerStartedMovement;
     public event Action<bool> PlayerChangedFacedDirection;
+    public event Action<bool> PlayerChangedDuckingState;
 
     //Cutscene Stuff
     private Vector2 cutsceneMovementDir;
@@ -112,7 +113,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.performed && isGrounded())
         {
+            rb.linearVelocityX = 0f;
             isDucking = true;
+            OnPlayerChangedDuckingState(isDucking);
         }
     }
 
@@ -121,6 +124,7 @@ public class PlayerMovement : MonoBehaviour
         if (context.performed)
         {
             isDucking = false;
+            OnPlayerChangedDuckingState(isDucking);
         }
     }
 
@@ -178,6 +182,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnPlayerChangedFacedDirection(bool isFacingRight)
     {
-        PlayerChangedFacedDirection(isFacingRight);
+        PlayerChangedFacedDirection?.Invoke(isFacingRight);
+    }
+
+    private void OnPlayerChangedDuckingState(bool isDucking)
+    {
+        PlayerChangedDuckingState?.Invoke(isDucking);
     }
 }

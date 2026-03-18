@@ -19,6 +19,7 @@ public class PlayerAnimations : MonoBehaviour
         _playerMovement.PlayerJumped += UpdateIsGrounded;
         _playerMovement.PlayerStartedMovement += UpdateHorizontalDir;
         _playerMovement.PlayerChangedFacedDirection += UpdateIsFacingRight;
+        _playerMovement.PlayerChangedDuckingState += UpdateIsDucking;
     }
 
     private void OnDisable()
@@ -26,6 +27,7 @@ public class PlayerAnimations : MonoBehaviour
         _playerMovement.PlayerJumped -= UpdateIsGrounded;
         _playerMovement.PlayerStartedMovement -= UpdateHorizontalDir;
         _playerMovement.PlayerChangedFacedDirection -= UpdateIsFacingRight;
+        _playerMovement.PlayerChangedDuckingState -= UpdateIsDucking;
     }
 
     private void UpdateIsGrounded(bool isGrounded)
@@ -36,6 +38,11 @@ public class PlayerAnimations : MonoBehaviour
     private void UpdateHorizontalDir(float dir)
     {
         _animator.SetFloat("HorizontalDir", dir);
+    }
+
+    private void UpdateIsDucking(bool isDucking)
+    {
+        _animator.SetBool("IsDucking", isDucking);
     }
 
     private void UpdateIsFacingRight(bool isFacingRight)
