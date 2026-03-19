@@ -38,6 +38,8 @@ public class PlayerAttack : MonoBehaviour
     {
         if (!CanPlayerAttack()) return;
 
+        SetAttackPosition();
+
         newAttackPrefab = Instantiate(attackPrefab, attackTransform.position, Quaternion.identity);
 
         //Check which side the attack prefab is on
@@ -47,6 +49,27 @@ public class PlayerAttack : MonoBehaviour
         }
 
         tempAttackCooldown = attackCooldown;
+    }
+
+    public void SetAttackPosition()
+    {
+        if (_playerStates.currentPlayerState == PlayerMovementStates.Ducking)
+        {
+            attackTransform.localPosition = new Vector3(attackTransform.localPosition.x, 0.5f, attackTransform.localPosition.z);
+        }
+        else
+        {
+            attackTransform.localPosition = new Vector3(attackTransform.localPosition.x, 1.5f, attackTransform.localPosition.z);
+        }
+        
+        if (_playerStates.IsFacingRight)
+        {
+            attackTransform.localPosition = new Vector3(1f, attackTransform.localPosition.y, attackTransform.localPosition.z);
+        }
+        else
+        {
+            attackTransform.localPosition = new Vector3(-1f, attackTransform.localPosition.y, attackTransform.localPosition.z);
+        }
     }
 
     private bool CanPlayerAttack()

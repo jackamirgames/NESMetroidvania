@@ -28,6 +28,6 @@ public class RoomTransitionZone : MonoBehaviour
 
     private bool IsPlayerMovingRight(Collider2D collision)
     {
-        return collision.gameObject.GetComponent<PlayerMovement>().IsFacingRight;
+        return collision.gameObject.GetComponent<PlayerStates>().IsFacingRight;
     }
 }

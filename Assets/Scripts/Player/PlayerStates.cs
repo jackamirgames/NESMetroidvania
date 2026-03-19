@@ -18,6 +18,13 @@ public class PlayerStates : MonoBehaviour
         set { _canControl = value; }
     }
 
+    [SerializeField] private bool isFacingRight;
+    public bool IsFacingRight
+    {
+        get { return isFacingRight; }
+        set { isFacingRight = value; }
+    }
+
     public PlayerMovementStates currentPlayerState;
 
     public IEnumerator TimeToGiveBackControl(float timeToWait)

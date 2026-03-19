@@ -12,12 +12,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float moveSpeed;
     private Vector2 movementDir;
     private Vector2 latestDir;
-    [SerializeField] private bool isFacingRight;
-    public bool IsFacingRight
-    {
-        get { return isFacingRight; }
-        set { isFacingRight = value; }
-    }
 
     [Header("Jump Checks")]
     [SerializeField] private Vector2 boxSize;
@@ -49,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         _playerStates.currentPlayerState = PlayerMovementStates.Idle;
-        isFacingRight = true;
+        _playerStates.IsFacingRight = true;
         isCurrentlyOnGround = isGrounded();
     }
 
@@ -91,9 +85,9 @@ public class PlayerMovement : MonoBehaviour
             _playerStates.currentPlayerState = PlayerMovementStates.Idle;
         }
 
-        CheckFacedDirection();
+        SetFacedDirection();
 
-        OnPlayerChangedFacedDirection(isFacingRight);
+        OnPlayerChangedFacedDirection(_playerStates.IsFacingRight);
         OnPlayerStartedMovement(Mathf.Abs(movementDir.x));
     }
 
@@ -144,17 +138,15 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void CheckFacedDirection()
+    public void SetFacedDirection()
     {
         if (latestDir.x > 0) //Facing Right
         {
-            isFacingRight = true;
-            attackPos.transform.localPosition = new Vector2(1f, 1.5f);
+            _playerStates.IsFacingRight = true;
         }
         else if (latestDir.x < 0) //Facing Left
         {
-            isFacingRight = false;
-            attackPos.transform.localPosition = new Vector2(-1f, 1.5f);
+            _playerStates.IsFacingRight = false;
         }
     }
 
