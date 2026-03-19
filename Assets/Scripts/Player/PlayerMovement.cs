@@ -26,7 +26,6 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private GameObject attackPos;
 
-    private bool isDucking;
     private bool isCurrentlyOnGround;
 
     //Events
@@ -49,14 +48,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        _playerStates.currentPlayerState = PlayerMovementStates.Idle;
         isFacingRight = true;
-        isDucking = false;
         isCurrentlyOnGround = isGrounded();
     }
 
     private void FixedUpdate()
     {
-        if (isDucking) return;
+        if (_playerStates.currentPlayerState == PlayerMovementStates.Ducking) return;
 
         if (_playerStates.CanControl)
         {
@@ -71,18 +70,25 @@ public class PlayerMovement : MonoBehaviour
         if (isCurrentlyOnGround != isGrounded())
         {
             OnPlayerJumped(isGrounded());
-            Debug.Log("Changed ground state: " + isGrounded());
         }
         isCurrentlyOnGround = isGrounded();
     }
 
     public void Move(InputAction.CallbackContext context)
     {
+        if (_playerStates.currentPlayerState == PlayerMovementStates.Ducking) return;
+
         movementDir = context.ReadValue<Vector2>();
         
         if (movementDir != Vector2.zero && movementDir != latestDir)
         {
             latestDir = movementDir;
+            _playerStates.currentPlayerState = PlayerMovementStates.Moving;
+        }
+
+        if (movementDir == Vector2.zero)
+        {
+            _playerStates.currentPlayerState = PlayerMovementStates.Idle;
         }
 
         CheckFacedDirection();
@@ -94,6 +100,7 @@ public class PlayerMovement : MonoBehaviour
     public void Jump(InputAction.CallbackContext context)
     {
         if (!_playerStates.CanControl) return;
+        if (_playerStates.currentPlayerState == PlayerMovementStates.Ducking) return;
 
         if (context.performed && isGrounded())
         {
@@ -114,17 +121,14 @@ public class PlayerMovement : MonoBehaviour
         if (context.performed && isGrounded())
         {
             rb.linearVelocityX = 0f;
-            isDucking = true;
-            OnPlayerChangedDuckingState(isDucking);
+            _playerStates.currentPlayerState = PlayerMovementStates.Ducking;
+            OnPlayerChangedDuckingState(_playerStates.currentPlayerState == PlayerMovementStates.Ducking);
         }
-    }
 
-    public void UnDuck(InputAction.CallbackContext context)
-    {
-        if (context.performed)
+        if (context.canceled)
         {
-            isDucking = false;
-            OnPlayerChangedDuckingState(isDucking);
+            _playerStates.currentPlayerState = PlayerMovementStates.Idle;
+            OnPlayerChangedDuckingState(_playerStates.currentPlayerState == PlayerMovementStates.Ducking);
         }
     }
 
@@ -142,7 +146,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void CheckFacedDirection()
     {
-        if (latestDir.x >= 0) //Facing Right
+        if (latestDir.x > 0) //Facing Right
         {
             isFacingRight = true;
             attackPos.transform.localPosition = new Vector2(1f, 1.5f);

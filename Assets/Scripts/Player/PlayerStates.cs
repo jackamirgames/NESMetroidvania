@@ -1,12 +1,12 @@
 using System.Collections;
 using UnityEngine;
 
-public enum PlayerState
+public enum PlayerMovementStates
 {
     Idle,
     Moving,
-    Attacking,
     Jumping,
+    Ducking
 }
 
 public class PlayerStates : MonoBehaviour
@@ -18,12 +18,11 @@ public class PlayerStates : MonoBehaviour
         set { _canControl = value; }
     }
 
-    public PlayerState currentPlayerState;
+    public PlayerMovementStates currentPlayerState;
 
     public IEnumerator TimeToGiveBackControl(float timeToWait)
     {
         yield return new WaitForSeconds(timeToWait);
         CanControl = true;
-        Debug.Log("Here");
     }
 }
