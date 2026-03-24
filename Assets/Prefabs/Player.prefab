@@ -47,8 +47,8 @@ GameObject:
   - component: {fileID: 2797062308515181414}
   - component: {fileID: 1883334834051712868}
   - component: {fileID: 1112927612530232847}
-  - component: {fileID: 5810105500432590844}
   - component: {fileID: 5678287213678116166}
+  - component: {fileID: 6996569352952212301}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -131,10 +131,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1.5
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1.4
+  m_GravityScale: 2
   m_Material: {fileID: 6200000, guid: e33ce0e08722da84bb45ebb2d04b5a96, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -172,7 +172,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 14
-  isFacingRight: 0
   boxSize: {x: 1, y: 0.1}
   castDistance: 0
   groundLayer:
@@ -207,6 +206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canControl: 1
+  isFacingRight: 0
   currentPlayerState: 0
 --- !u!114 &1112927612530232847
 MonoBehaviour:
@@ -318,20 +318,6 @@ MonoBehaviour:
   m_DefaultActionMap: 
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &5810105500432590844
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6394103139833491017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f04eea354cec6a47aa3cacd12e7b289, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _currentJump: 3
-  _attackUnlocked: 0
 --- !u!114 &5678287213678116166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,6 +330,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9af9b97e2ae80641877c8abad135898, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6996569352952212301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6394103139833491017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f04eea354cec6a47aa3cacd12e7b289, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentJump: 5
+  _attackUnlocked: 1
 --- !u!1 &6695755795908460815
 GameObject:
   m_ObjectHideFlags: 0

@@ -100,6 +100,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(new Vector2(0f, 100f * _playerUpgrades.GetJumpPower()), ForceMode2D.Force);
             OnPlayerJumped(true);
+            Debug.Log(_playerUpgrades.GetJumpPower());
         }
 
         if (context.canceled)

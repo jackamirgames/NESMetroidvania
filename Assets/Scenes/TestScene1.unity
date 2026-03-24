@@ -13768,6 +13768,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4926726000481364342, guid: 715b272a14a9e4a419a93a5f9dbb7c96, type: 3}
+      propertyPath: thisJumpUpgrade
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 5684194064189040898, guid: 715b272a14a9e4a419a93a5f9dbb7c96, type: 3}
       propertyPath: m_Name
       value: Jump Upgrade
