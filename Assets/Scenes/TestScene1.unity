@@ -1271,9 +1271,10 @@ GameObject:
   - component: {fileID: 918518395}
   - component: {fileID: 918518397}
   - component: {fileID: 918518398}
-  m_Layer: 0
+  - component: {fileID: 918518399}
+  m_Layer: 9
   m_Name: TestHangingSpiderEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1380,6 +1381,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 1
+--- !u!114 &918518399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 918518394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b896f3aca20326345b95d0d5b5b75af2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fallSpeed: -14
+  climbSpeed: 8
+  currentState: 0
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &1024289026
 GameObject:
   m_ObjectHideFlags: 0
@@ -1715,10 +1734,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e08754dae891834fa9eb2c9ec902fc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walkSpeed: 5
+  turnAroundAtLedge: 1
   groundMask:
     serializedVersion: 2
     m_Bits: 256
-  walkSpeed: 5
 --- !u!1 &1464121636
 GameObject:
   m_ObjectHideFlags: 0
@@ -2108,7 +2128,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1690551172}
   - component: {fileID: 1690551173}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
