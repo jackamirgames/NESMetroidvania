@@ -49,7 +49,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_playerStates.currentPlayerState == PlayerMovementStates.Ducking) return;
+        if (_playerStates.currentPlayerState == PlayerMovementStates.Ducking ||
+            _playerStates.currentPlayerState == PlayerMovementStates.InKnockback) return;
 
         if (_playerStates.CanControl)
         {

@@ -6,7 +6,8 @@ public enum PlayerMovementStates
     Idle,
     Moving,
     Jumping,
-    Ducking
+    Ducking,
+    InKnockback
 }
 
 public class PlayerStates : MonoBehaviour

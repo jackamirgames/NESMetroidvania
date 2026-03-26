@@ -36,4 +36,12 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         Destroy(gameObject);
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            TakeDamage(2);
+        }
+    }
 }
