@@ -18,7 +18,7 @@ public class PlayerKnockback : MonoBehaviour, IKnockbackable
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            TakeKnockback(100, Vector2.zero, 1f);
+            TakeKnockback(1000, Vector2.zero, 0.125f);
         }
 
         if (_playerStates.currentPlayerState == PlayerMovementStates.InKnockback)
@@ -27,6 +27,7 @@ public class PlayerKnockback : MonoBehaviour, IKnockbackable
 
             if (tempKnockbackTimer <= 0)
             {
+                rb.linearVelocityY = 0;
                 _playerStates.currentPlayerState = PlayerMovementStates.Idle;
             }
         }
