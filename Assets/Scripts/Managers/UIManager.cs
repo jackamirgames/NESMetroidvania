@@ -16,7 +16,7 @@ public class UIManager : MonoBehaviour
     {
         if (instance != null)
         {
-            Debug.Log("Found more than 1 Camera Manager. FIX IT NOW");
+            Debug.Log("Found more than 1 UI Manager. FIX IT NOW");
         }
         instance = this;
     }
